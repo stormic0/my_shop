@@ -151,7 +151,7 @@ BRAINTREE_PRIVATE_KEY = 'XXX'
 import braintree
 
 BRAINTREE_CONF = braintree.Configuration(
-    braintree.Environment.Sandbox,
+    braintree.Environment.Sandbox,  # "Production" for deployment
     BRAINTREE_MERCHANT_ID,
     BRAINTREE_PUBLIC_KEY,
     BRAINTREE_PRIVATE_KEY
