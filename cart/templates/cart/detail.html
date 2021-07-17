@@ -1,4 +1,4 @@
-{% extends 'shop/_base.html' %}
+{% extends 'shop/base.html' %}
 {% load static %}
 
 {% block title %}Your shopping cart{% endblock %}
@@ -22,7 +22,7 @@
                     <tr>
                         <td>
                             <a href="{{ product.get_absolute_url }}">
-                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}">
+                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
                             </a>
                         </td>
                         <td>{{ product.name }}</td>
@@ -31,6 +31,7 @@
                                 {{ item.update_quantity_form.quantity }}
                                 {{ item.update_quantity_form.override }}
                                 {% csrf_token %}
+                                <input type="submit" value="Update">
                             </form>
                         </td>
                         <td>
@@ -39,8 +40,8 @@
                                 <input type="submit" value="Remove">
                             </form>
                         </td>
-                        <td class="num">${{ item.price }}</td>
-                        <td class="num">${{ item.total_price }}</td>
+                        <td>${{ item.price }}</td>
+                        <td>${{ item.total_price }}</td>
                     </tr>
                 {% endwith %}
             {% endfor %}
@@ -52,9 +53,10 @@
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url 'shop:product_list' %}" class="button light">
-            Continue shopping
-        </a>
-        <a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
+        <form class="text-right" action="{% url 'orders:order_create' %}" method="post">
+            {% csrf_token %}
+            <a href="{% url 'shop:product_list' %}" class="button light">Continue shopping</a>
+            <input type="submit" value="Checkout">
+        </form>
     </p>
 {% endblock %}

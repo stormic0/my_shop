@@ -1,6 +1,4 @@
-Django
-Pillow
-celery==4.4.2
-flower==0.9.3
-braintree
-WeasyPrint
+django==3.2.5
+Pillow==8.3.1
+celery==5.1.2
+flower==1.0.0
